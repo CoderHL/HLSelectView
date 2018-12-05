@@ -92,7 +92,7 @@ NSString *const NSNotificationReadBtnClick = @"readBtnClick";
 {
     {
         UILabel *sourceName = [[UILabel alloc]init];
-        sourceName.backgroundColor = [UIColor colorWithRed:146/255.0 green:154/255.0 blue:163/255.0 alpha:1.0];
+        sourceName.layer.backgroundColor = [UIColor colorWithRed:146/255.0 green:154/255.0 blue:163/255.0 alpha:1.0].CGColor;
         sourceName.textAlignment = NSTextAlignmentCenter;
         [self addSubview:sourceName];
         self.sourceName = sourceName;
@@ -113,23 +113,20 @@ NSString *const NSNotificationReadBtnClick = @"readBtnClick";
     
     {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setBackgroundColor:[UIColor colorWithRed:238/255.0 green:71/255.0 blue:69/255.0 alpha:0.1]];
+        btn.layer.backgroundColor = [UIColor colorWithRed:238/255.0 green:71/255.0 blue:69/255.0 alpha:0.1].CGColor;
         NSAttributedString *string = [[NSAttributedString alloc]initWithString:@"免费读" attributes: @{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 12],NSForegroundColorAttributeName: [UIColor colorWithRed:238/255.0 green:71/255.0 blue:69/255.0 alpha:1.0]}];
         [btn setAttributedTitle:string forState:UIControlStateNormal];
         [btn setContentEdgeInsets:UIEdgeInsetsMake(5, 15, 5, 15)];
         [btn sizeToFit];
         [btn addTarget:self action:@selector(readBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:btn.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(btn.hlt_height, btn.hlt_height)];
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
-        maskLayer.frame = btn.bounds;
-        maskLayer.path = maskPath.CGPath;
-        btn.layer.mask = maskLayer;
+        btn.layer.cornerRadius = btn.hlt_height/2.0;
+        
         [self addSubview:btn];
         self.readBtn = btn;
     }
     
 }
+
 
 - (void)readBtnClick:(UIButton *)readBtn
 {
@@ -142,12 +139,7 @@ NSString *const NSNotificationReadBtnClick = @"readBtnClick";
     _sourceName.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:@"sourceName"] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 10],NSForegroundColorAttributeName: [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]}];
     [_sourceName sizeToFit];
     _sourceName.hlt_width = _sourceName.hlt_width+10;
-    
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:_sourceName.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(4, 4)];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];        maskLayer.frame = _sourceName.bounds;
-    maskLayer.path = maskPath.CGPath;
-    _sourceName.layer.mask  = maskLayer;
-    
+    _sourceName.layer.cornerRadius = 4;
     
     _selectedPercent.textAlignment = NSTextAlignmentRight;
     _selectedPercent.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:@"selectedStr"] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 10],NSForegroundColorAttributeName: [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1.0]}];

@@ -70,9 +70,15 @@ static CGFloat const KCornerRadiu_ = 12;
     containView.layer.shadowOffset = CGSizeMake(0, -6);
     containView.layer.shadowOpacity = 1;
     containView.layer.shadowRadius = KCornerRadiu_;
-    containView.layer.masksToBounds = NO;
-    containView.layer.cornerRadius = KCornerRadiu_;
+
     containView.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:containView.bounds];
+    containView.layer.shadowPath = path.CGPath;//防止离屏渲染
+    
+    containView.layer.cornerRadius = KCornerRadiu_;
+    //containView.layer.shouldRasterize = YES;//光删化,预先渲染成位图,使用在阴影的lay上提高性能.
+    
+    
     UITableView *tableView = [[UITableView alloc]initWithFrame:containView.bounds style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
@@ -99,16 +105,16 @@ static CGFloat const KCornerRadiu_ = 12;
     //headerView
     UIView *headerView = [[UIView alloc]initWithFrame:(CGRect){.origin=CGPointMake(0, 0),.size=CGSizeMake(self.hlt_width, CGRectGetMaxY(titleLabel.frame)+20)}];
     [headerView addSubview:titleLabel];
-    headerView.backgroundColor = [UIColor whiteColor];
-    [self cornerView:headerView cornerRadiu:KCornerRadiu_ byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
+    headerView.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    [self p_cornerView:headerView cornerRadiu:KCornerRadiu_ byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
     
     //identifyView
     CGFloat width = 36;
     CGFloat height = 6;
     CGFloat y = 7;
     UIView *identifyView = [[UIView alloc]initWithFrame:CGRectMake((self.hlt_width-width)/2.0, y, width, height)];
-    identifyView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1];
-    [self cornerView:identifyView cornerRadiu:3 byRoundingCorners:UIRectCornerAllCorners];
+    identifyView.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1].CGColor;
+    identifyView.layer.cornerRadius = 3;
     [headerView addSubview:identifyView];
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(headerViewPan:)];
@@ -152,7 +158,7 @@ static CGFloat const KCornerRadiu_ = 12;
         {
             CGFloat alpha = KMaxAlpha_*(_maxY-_containView.hlt_y)/(_maxY-_minY);
             [_containView setHlt_y: _containView.hlt_y + transPoint.y];
-            self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha];
+            self.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha].CGColor;
         }
         
     }else if (pan.state == UIGestureRecognizerStateEnded){
@@ -184,12 +190,12 @@ static CGFloat const KCornerRadiu_ = 12;
     [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [_containView setHlt_y:positionY];
         CGFloat alpha =  KMaxAlpha_*(_maxY-_containView.hlt_y)/(_maxY-_minY);
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha];
+        self.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha].CGColor;
     } completion:completion];
 }
 
 
-- (void)cornerView:(UIView *)view cornerRadiu:(CGFloat)cornerRadiu byRoundingCorners:(UIRectCorner)corners
+- (void)p_cornerView:(UIView *)view cornerRadiu:(CGFloat)cornerRadiu byRoundingCorners:(UIRectCorner)corners
 {
     CGRect bounds = view.bounds;
     if ([view isKindOfClass:[UITableView class]]) {
