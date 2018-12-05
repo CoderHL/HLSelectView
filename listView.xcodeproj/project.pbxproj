@@ -14,8 +14,8 @@
 		A2487A9421B5609B00F3BAA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2487A9221B5609B00F3BAA5 /* LaunchScreen.storyboard */; };
 		A2487A9721B5609B00F3BAA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A2487A9621B5609B00F3BAA5 /* main.m */; };
 		A2487AA621B6783A00F3BAA5 /* HLDemoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A2487AA521B6783A00F3BAA5 /* HLDemoObject.m */; };
-		A2487AAF21B7BD4200F3BAA5 /* HLSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2487AAC21B7BD4200F3BAA5 /* HLSelectView.m */; };
-		A2487AB021B7BD4200F3BAA5 /* HLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2487AAE21B7BD4200F3BAA5 /* HLTableViewCell.m */; };
+		A2487ABD21B7CAA000F3BAA5 /* HLSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2487ABA21B7CAA000F3BAA5 /* HLSelectView.m */; };
+		A2487ABE21B7CAA000F3BAA5 /* HLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2487ABC21B7CAA000F3BAA5 /* HLTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,10 +31,10 @@
 		A2487A9621B5609B00F3BAA5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A2487AA421B6783A00F3BAA5 /* HLDemoObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLDemoObject.h; sourceTree = "<group>"; };
 		A2487AA521B6783A00F3BAA5 /* HLDemoObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HLDemoObject.m; sourceTree = "<group>"; };
-		A2487AAB21B7BD4200F3BAA5 /* HLSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSelectView.h; sourceTree = "<group>"; };
-		A2487AAC21B7BD4200F3BAA5 /* HLSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSelectView.m; sourceTree = "<group>"; };
-		A2487AAD21B7BD4200F3BAA5 /* HLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLTableViewCell.h; sourceTree = "<group>"; };
-		A2487AAE21B7BD4200F3BAA5 /* HLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLTableViewCell.m; sourceTree = "<group>"; };
+		A2487AB921B7CAA000F3BAA5 /* HLSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSelectView.h; sourceTree = "<group>"; };
+		A2487ABA21B7CAA000F3BAA5 /* HLSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSelectView.m; sourceTree = "<group>"; };
+		A2487ABB21B7CAA000F3BAA5 /* HLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLTableViewCell.h; sourceTree = "<group>"; };
+		A2487ABC21B7CAA000F3BAA5 /* HLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +67,7 @@
 		A2487A8621B5609B00F3BAA5 /* listView */ = {
 			isa = PBXGroup;
 			children = (
-				A2487AAA21B7BD4200F3BAA5 /* SelectView */,
+				A2487AB821B7CAA000F3BAA5 /* HLSelectView */,
 				A2487A8721B5609B00F3BAA5 /* AppDelegate.h */,
 				A2487A8821B5609B00F3BAA5 /* AppDelegate.m */,
 				A2487A8A21B5609B00F3BAA5 /* ViewController.h */,
@@ -83,16 +83,16 @@
 			path = listView;
 			sourceTree = "<group>";
 		};
-		A2487AAA21B7BD4200F3BAA5 /* SelectView */ = {
+		A2487AB821B7CAA000F3BAA5 /* HLSelectView */ = {
 			isa = PBXGroup;
 			children = (
-				A2487AAB21B7BD4200F3BAA5 /* HLSelectView.h */,
-				A2487AAC21B7BD4200F3BAA5 /* HLSelectView.m */,
-				A2487AAD21B7BD4200F3BAA5 /* HLTableViewCell.h */,
-				A2487AAE21B7BD4200F3BAA5 /* HLTableViewCell.m */,
+				A2487AB921B7CAA000F3BAA5 /* HLSelectView.h */,
+				A2487ABA21B7CAA000F3BAA5 /* HLSelectView.m */,
+				A2487ABB21B7CAA000F3BAA5 /* HLTableViewCell.h */,
+				A2487ABC21B7CAA000F3BAA5 /* HLTableViewCell.m */,
 			);
-			path = SelectView;
-			sourceTree = "<group>";
+			path = HLSelectView;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -166,11 +166,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2487A8C21B5609B00F3BAA5 /* ViewController.m in Sources */,
-				A2487AB021B7BD4200F3BAA5 /* HLTableViewCell.m in Sources */,
+				A2487ABE21B7CAA000F3BAA5 /* HLTableViewCell.m in Sources */,
 				A2487A9721B5609B00F3BAA5 /* main.m in Sources */,
 				A2487AA621B6783A00F3BAA5 /* HLDemoObject.m in Sources */,
 				A2487A8921B5609B00F3BAA5 /* AppDelegate.m in Sources */,
-				A2487AAF21B7BD4200F3BAA5 /* HLSelectView.m in Sources */,
+				A2487ABD21B7CAA000F3BAA5 /* HLSelectView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
