@@ -15,7 +15,7 @@
 
 @end
 // 监听cell上的按钮点击需要注册此通知
-extern NSString *const NSNotificationReadBtnClick;
+extern NSString *const HLNotificationReadBtnClick;
 @interface HLSelectView : UIView
 
 - (instancetype _Nonnull )initWithFrame:(CGRect)frame andTitle:(NSString *_Nullable)title;

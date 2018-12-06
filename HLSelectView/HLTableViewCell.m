@@ -76,7 +76,7 @@
 @property (nonatomic, weak) UIButton *readBtn;
 @end
 NSString *const fontName_ = @"PingFangSC-Medium";
-NSString *const NSNotificationReadBtnClick = @"readBtnClick";
+NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
 @implementation HLTableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -131,7 +131,7 @@ NSString *const NSNotificationReadBtnClick = @"readBtnClick";
 - (void)readBtnClick:(UIButton *)readBtn
 {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NSNotificationReadBtnClick object:[NSNotification notificationWithName:NSNotificationReadBtnClick object:nil] userInfo:@{@"url":_urlLabel.text}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:HLNotificationReadBtnClick object:[NSNotification notificationWithName:HLNotificationReadBtnClick object:nil] userInfo:@{@"url":_urlLabel.text}];
 }
 
 -(void)setDataModel:(id)dataModel

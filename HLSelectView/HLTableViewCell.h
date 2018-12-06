@@ -23,7 +23,7 @@ typedef void(^readBtnClickBlock)(void);
 - (void)setHlt_x:(CGFloat)hlt_x;
 @end
 extern NSString *const fontName_;
-extern NSString *const NSNotificationReadBtnClick;
+extern NSString *const HLNotificationReadBtnClick;
 @interface HLTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) id dataModel;

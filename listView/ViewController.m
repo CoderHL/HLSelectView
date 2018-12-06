@@ -32,7 +32,7 @@
        object = [HLDemoObject demoObjecWithSourceName:[NSString stringWithFormat:@"起点中文网"] sourceUrl:@"www.baidu.com.www.baidu.com.www.baidu.com.www.baidu.com.www.baidu.com"];
         [self.datas addObject:object];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readBtnClickNotification:) name:NSNotificationReadBtnClick object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readBtnClickNotification:) name:HLNotificationReadBtnClick object:nil];
 }
 
 
