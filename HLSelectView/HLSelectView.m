@@ -266,7 +266,14 @@ static CGFloat const KCornerRadiu_ = 12;
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
+    
     self.minY = (self.hlt_height - _minY)>tableView.contentSize.height ? self.hlt_height - tableView.contentSize.height : _minY;
+    if (_minY > _containView.hlt_y) {
+        [_containView setHlt_height:self.hlt_height-_minY];
+        [_containView setHlt_y:_minY];
+        _tableView.frame = _containView.bounds;
+        _maxY = _minY;
+    }
 }
 #pragma mark - system
 -(void)dealloc
