@@ -74,6 +74,9 @@ extern NSString *const HLCellKeyOfFourSubview;
 @end
 
 @interface HLTableViewCell()
+{
+    NSInteger _currentIndex;
+}
 @property (nonatomic, weak) UILabel *sourceName;
 @property (nonatomic, weak) UILabel *urlLabel;
 @property (nonatomic, weak) UILabel *selectedPercent;
@@ -133,12 +136,12 @@ NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
 
 - (void)readBtnClick:(UIButton *)readBtn
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:HLNotificationReadBtnClick object:[NSNotification notificationWithName:HLNotificationReadBtnClick object:nil] userInfo:@{@"url":_urlLabel.text}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:HLNotificationReadBtnClick object:[NSNotification notificationWithName:HLNotificationReadBtnClick object:nil] userInfo:@{@"url":_urlLabel.text,@"currentIndex":@(_currentIndex)}];
 }
 
-- (void)setCellValueWithDataModel:(id)dataModel andKeyValues:(NSDictionary *)kayValues
+- (void)setCellValueWithDataModel:(id)dataModel KeyValues:(NSDictionary *)kayValues andIndex:(NSInteger)index
 {
-    
+    _currentIndex = index;
     _sourceName.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:kayValues[HLCellKeyOfFirstSubview]] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 10],NSForegroundColorAttributeName: [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]}];
     [_sourceName sizeToFit];
     _sourceName.hlt_width = _sourceName.hlt_width+10;

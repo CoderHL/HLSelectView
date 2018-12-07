@@ -249,7 +249,7 @@ static CGFloat const KCornerRadiu_ = 12;
     if (_delegateFlags.cellKeyValuesFlag) {
         dictionary = [_dataSource dictionaryWithCellValuesForKeys];
     }
-    [cell setCellValueWithDataModel:self.datas[indexPath.row] andKeyValues:dictionary];
+    [cell setCellValueWithDataModel:self.datas[indexPath.row] KeyValues:dictionary andIndex:indexPath.row];
     return cell;
 }
 
