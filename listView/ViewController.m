@@ -35,14 +35,30 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readBtnClickNotification:) name:HLNotificationReadBtnClick object:nil];
 }
 
-
 - (void)readBtnClickNotification:(NSNotification *)readBtnClickNotification
 {
-    NSLog(@"%@",readBtnClickNotification.userInfo[@"url"]);
+    NSLog(@"%@",readBtnClickNotification.userInfo);
 }
+
+
+#pragma mark -- HLSelectViewDataSource
 
 - (NSArray * _Nullable)datasWithSelectView:(HLSelectView *)selectView {
     return self.datas;
+}
+
+- (UIView *)responseViewWithPoint:(CGPoint)point andEvent:(UIEvent *)event
+{
+    return nil;
+}
+
+- (NSDictionary *)dictionaryWithCellValuesForKeys
+{
+    return @{
+             HLCellKeyOfFirstSubview:@"sourceName",
+             HLCellKeyOfSecondSubview:@"sourceUrl",
+             HLCellKeyOfThirdSubview:@"selectedStr"
+             };
 }
 
 

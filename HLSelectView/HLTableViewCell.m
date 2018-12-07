@@ -8,6 +8,10 @@
 
 #import "HLTableViewCell.h"
 
+extern NSString *const HLCellKeyOfFirstSubview;
+extern NSString *const HLCellKeyOfSecondSubview;
+extern NSString *const HLCellKeyOfThirdSubview;
+extern NSString *const HLCellKeyOfFourSubview;
 @interface UIView(HLTableViewCellExtension)
 - (void)hlt_setOrigin:(CGPoint)origin;
 - (CGFloat)hlt_x;
@@ -127,25 +131,24 @@ NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
     
 }
 
-
 - (void)readBtnClick:(UIButton *)readBtn
 {
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:HLNotificationReadBtnClick object:[NSNotification notificationWithName:HLNotificationReadBtnClick object:nil] userInfo:@{@"url":_urlLabel.text}];
 }
 
--(void)setDataModel:(id)dataModel
+- (void)setCellValueWithDataModel:(id)dataModel andKeyValues:(NSDictionary *)kayValues
 {
-    _sourceName.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:@"sourceName"] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 10],NSForegroundColorAttributeName: [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]}];
+    
+    _sourceName.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:kayValues[HLCellKeyOfFirstSubview]] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 10],NSForegroundColorAttributeName: [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]}];
     [_sourceName sizeToFit];
     _sourceName.hlt_width = _sourceName.hlt_width+10;
     _sourceName.layer.cornerRadius = 4;
     
     _selectedPercent.textAlignment = NSTextAlignmentRight;
-    _selectedPercent.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:@"selectedStr"] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 10],NSForegroundColorAttributeName: [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1.0]}];
+    _selectedPercent.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:kayValues[HLCellKeyOfThirdSubview]] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 10],NSForegroundColorAttributeName: [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1.0]}];
     [_selectedPercent sizeToFit];
     
-    _urlLabel.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:@"sourceUrl"] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 14],NSForegroundColorAttributeName: [UIColor colorWithRed:146/255.0 green:154/255.0 blue:163/255.0 alpha:1.0]}];
+    _urlLabel.attributedText = [[NSAttributedString alloc]initWithString:[dataModel valueForKey:kayValues[HLCellKeyOfSecondSubview]] attributes:@{NSFontAttributeName: [UIFont fontWithName:fontName_ size: 14],NSForegroundColorAttributeName: [UIColor colorWithRed:146/255.0 green:154/255.0 blue:163/255.0 alpha:1.0]}];
     [_urlLabel sizeToFit];
 }
 
@@ -156,7 +159,7 @@ NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
     //sourceName
     point = CGPointMake(15, (self.hlt_height-_sourceName.hlt_height)/2.0);
     [_sourceName hlt_setOrigin:point];
-   
+    
     //readBtn
     point = CGPointMake(self.hlt_width - 15-_readBtn.hlt_width, (self.hlt_height-_readBtn.hlt_height)/2.0);
     [_readBtn hlt_setOrigin:point];
@@ -168,7 +171,7 @@ NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
     //urlLabel
     point = CGPointMake(CGRectGetMaxX(_sourceName.frame)+8, (self.hlt_height-_urlLabel.hlt_height)/2.0);
     _urlLabel.frame = (CGRect){.origin=point, .size=CGSizeMake(_selectedPercent.hlt_x-15-point.x, _urlLabel.hlt_height)};
-
+    
 }
 
 

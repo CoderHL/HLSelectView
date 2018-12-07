@@ -14,4 +14,5 @@
 
 @property (nonatomic, copy, readonly) NSString *sourceName;
 @property (nonatomic, copy, readonly) NSString *sourceUrl;
+
 @end

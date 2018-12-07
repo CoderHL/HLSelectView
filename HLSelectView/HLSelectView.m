@@ -12,10 +12,13 @@
 #define KZoom_Scale_X ((KScreenWidth)/(375.0))
 #define KZoom_Scale_Y ((KScreenHeight)/(667.0))
 #define EPSILON 1e-6
+
 @interface HLSelectView()<UITableViewDelegate,UITableViewDataSource>
 {
     struct {
         unsigned int datasFlag:1;//是否实现数据源方法
+        unsigned int responseViewFlag:1;
+        unsigned int cellKeyValuesFlag:1;
     } _delegateFlags;
     CGFloat _maxY;//浮框允许的最大y,即最低点
     CGRect _frame;
@@ -27,7 +30,10 @@
 @property (nonatomic, strong) UIView *headerView;
 @end
 
-
+NSString *const HLCellKeyOfFirstSubview = @"firstView";
+NSString *const HLCellKeyOfSecondSubview = @"secondView";
+NSString *const HLCellKeyOfThirdSubview = @"thirdView";
+NSString *const HLCellKeyOfFourSubview = @"fourView";
 static CGFloat const KMaxAlpha_ = 0.5;
 static CGFloat const KCornerRadiu_ = 12;
 
@@ -56,9 +62,8 @@ static CGFloat const KCornerRadiu_ = 12;
 
 - (void)p_initialSetting
 {
-    self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.0];
+    self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     self.minY = _minY ? _minY : self.hlt_height/5.0;
-    
 }
 
 
@@ -70,7 +75,7 @@ static CGFloat const KCornerRadiu_ = 12;
     containView.layer.shadowOffset = CGSizeMake(0, -6);
     containView.layer.shadowOpacity = 1;
     containView.layer.shadowRadius = KCornerRadiu_;
-
+    
     containView.layer.backgroundColor = [UIColor whiteColor].CGColor;
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:containView.bounds];
     containView.layer.shadowPath = path.CGPath;//防止离屏渲染
@@ -86,6 +91,7 @@ static CGFloat const KCornerRadiu_ = 12;
     [self addSubview:containView];
     [containView addSubview:tableView];
     self.tableView = tableView;
+    self.tableView.tableFooterView = [UIView new];
     self.containView = containView;
 }
 
@@ -214,6 +220,8 @@ static CGFloat const KCornerRadiu_ = 12;
 {
     _dataSource = dataSource;
     _delegateFlags.datasFlag = [self.dataSource respondsToSelector:@selector(datasWithSelectView:)];
+    _delegateFlags.responseViewFlag = [self.dataSource respondsToSelector:@selector(responseViewWithPoint:andEvent:)];
+    _delegateFlags.cellKeyValuesFlag = [self.dataSource respondsToSelector:@selector(dictionaryWithCellValuesForKeys)];
 }
 
 
@@ -237,7 +245,11 @@ static CGFloat const KCornerRadiu_ = 12;
         cell = [[HLTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.dataModel = self.datas[indexPath.row];
+    NSDictionary *dictionary;
+    if (_delegateFlags.cellKeyValuesFlag) {
+        dictionary = [_dataSource dictionaryWithCellValuesForKeys];
+    }
+    [cell setCellValueWithDataModel:self.datas[indexPath.row] andKeyValues:dictionary];
     return cell;
 }
 
@@ -248,7 +260,7 @@ static CGFloat const KCornerRadiu_ = 12;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-
+    
     return _headerView;
 }
 
@@ -256,10 +268,22 @@ static CGFloat const KCornerRadiu_ = 12;
 {
     self.minY = (self.hlt_height - _minY)>tableView.contentSize.height ? self.hlt_height - tableView.contentSize.height : _minY;
 }
-
+#pragma mark - system
 -(void)dealloc
 {
     self.headerView = nil;
+}
+
+-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *responseView;
+    if (point.y < _containView.hlt_y && _delegateFlags.datasFlag) {
+        responseView = [_dataSource responseViewWithPoint:point andEvent:event];
+        responseView = [responseView hitTest:point withEvent:event];
+    }else{
+        responseView = [super hitTest:point withEvent:event];
+    }
+    return responseView;
 }
 
 @end

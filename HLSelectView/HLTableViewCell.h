@@ -26,6 +26,6 @@ extern NSString *const fontName_;
 extern NSString *const HLNotificationReadBtnClick;
 @interface HLTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) id dataModel;
+- (void)setCellValueWithDataModel:(id)dataModel andKeyValues:(NSDictionary *)kayValues;
 
 @end
