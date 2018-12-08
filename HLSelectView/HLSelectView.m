@@ -284,7 +284,7 @@ static CGFloat const KCornerRadiu_ = 12;
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView *responseView;
-    if (point.y < _containView.hlt_y && _delegateFlags.datasFlag) {
+    if (point.y < _containView.hlt_y && _delegateFlags.responseViewFlag) {
         responseView = [_dataSource responseViewWithPoint:point andEvent:event];
         responseView = [responseView hitTest:point withEvent:event];
     }else{
