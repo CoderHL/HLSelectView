@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "HLSelectView.h"
 #import "HLDemoObject.h"
-@interface ViewController ()<HLSelectViewDataSource>
+@interface ViewController ()<HLSelectViewDataSource,HLSelectViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *datas;
 
@@ -24,15 +24,16 @@
     NSLog(@"frame == %@",NSStringFromCGRect(self.view.frame));
     HLSelectView *selectView = [[HLSelectView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height-300, self.view.bounds.size.width, 300) andTitle:@"检测到网友常用以下的站点免费阅读<<感冒让我走向地狱后重生到清朝当王爷>>"];
     selectView.dataSource = self;
+    selectView.delegate = self;
     [self.view addSubview:selectView];
     self.selectView = selectView;
     self.datas = [NSMutableArray array];
     HLDemoObject *object;
-    for (int i=0; i<2; i++) {
+    for (int i=0; i<10; i++) {
        object = [HLDemoObject demoObjecWithSourceName:[NSString stringWithFormat:@"起点中文网"] sourceUrl:@"www.baidu.com.www.baidu.com.www.baidu.com.www.baidu.com.www.baidu.com"];
         [self.datas addObject:object];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readBtnClickNotification:) name:HLNotificationReadBtnClick object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readBtnClickNotification:) name:HLNotificationReadBtnClick object:nil];
 }
 
 - (void)readBtnClickNotification:(NSNotification *)readBtnClickNotification
@@ -61,6 +62,10 @@
              };
 }
 
-
+#pragma mark - HLSelectViewDelegate
+-(void)selectView:(HLSelectView *)selectView didSelectRowAtIndex:(NSInteger)index
+{
+    NSLog(@"index == %zd",index);
+}
 
 @end

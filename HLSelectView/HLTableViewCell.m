@@ -83,7 +83,7 @@ extern NSString *const HLCellKeyOfFourSubview;
 @property (nonatomic, weak) UIButton *readBtn;
 @end
 NSString *const fontName_ = @"PingFangSC-Medium";
-NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
+//NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
 @implementation HLTableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -125,7 +125,7 @@ NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
         [btn setAttributedTitle:string forState:UIControlStateNormal];
         [btn setContentEdgeInsets:UIEdgeInsetsMake(5, 15, 5, 15)];
         [btn sizeToFit];
-        [btn addTarget:self action:@selector(readBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [btn addTarget:self action:@selector(readBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.layer.cornerRadius = btn.hlt_height/2.0;
         
         [self addSubview:btn];
@@ -134,10 +134,12 @@ NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
     
 }
 
+/*
 - (void)readBtnClick:(UIButton *)readBtn
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:HLNotificationReadBtnClick object:[NSNotification notificationWithName:HLNotificationReadBtnClick object:nil] userInfo:@{@"url":_urlLabel.text,@"currentIndex":@(_currentIndex)}];
 }
+ */
 
 - (void)setCellValueWithDataModel:(id)dataModel KeyValues:(NSDictionary *)kayValues andIndex:(NSInteger)index
 {
@@ -176,10 +178,6 @@ NSString *const HLNotificationReadBtnClick = @"HLReadBtnClick";
     _urlLabel.frame = (CGRect){.origin=point, .size=CGSizeMake(_selectedPercent.hlt_x-15-point.x, _urlLabel.hlt_height)};
     
 }
-
-
-
-
 
 @end
 

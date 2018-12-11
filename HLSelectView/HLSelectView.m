@@ -19,6 +19,7 @@
         unsigned int datasFlag:1;//是否实现数据源方法
         unsigned int responseViewFlag:1;
         unsigned int cellKeyValuesFlag:1;
+        unsigned int didSelectRowFlag:1;
     } _delegateFlags;
     CGFloat _maxY;//浮框允许的最大y,即最低点
     CGRect _frame;
@@ -28,6 +29,7 @@
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, copy) NSArray *datas;
 @property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, weak) UIView *identifyView;
 @end
 
 NSString *const HLCellKeyOfFirstSubview = @"firstView";
@@ -121,6 +123,7 @@ static CGFloat const KCornerRadiu_ = 12;
     UIView *identifyView = [[UIView alloc]initWithFrame:CGRectMake((self.hlt_width-width)/2.0, y, width, height)];
     identifyView.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.1].CGColor;
     identifyView.layer.cornerRadius = 3;
+    self.identifyView = identifyView;
     [headerView addSubview:identifyView];
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(headerViewPan:)];
@@ -224,6 +227,12 @@ static CGFloat const KCornerRadiu_ = 12;
     _delegateFlags.cellKeyValuesFlag = [self.dataSource respondsToSelector:@selector(dictionaryWithCellValuesForKeys)];
 }
 
+-(void)setDelegate:(id<HLSelectViewDelegate>)delegate
+{
+    _delegate = delegate;
+    _delegateFlags.didSelectRowFlag = [self.delegate respondsToSelector:@selector(selectView:didSelectRowAtIndex:)];
+}
+
 
 #pragma mark - UITableViewDataSource
 
@@ -269,12 +278,20 @@ static CGFloat const KCornerRadiu_ = 12;
     
     self.minY = (self.hlt_height - _minY)>tableView.contentSize.height ? self.hlt_height - tableView.contentSize.height : _minY;
     if (_minY > _containView.hlt_y) {
-        [_containView setHlt_height:self.hlt_height-_minY];
-        [_containView setHlt_y:_minY];
-        _tableView.frame = _containView.bounds;
-        _maxY = _minY;
+        _identifyView.hidden = YES;
+        _minY = _maxY;
+    }else{
+        _identifyView.hidden = NO;
     }
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_delegateFlags.didSelectRowFlag) {
+        [_delegate selectView:self didSelectRowAtIndex:indexPath.row];
+    }
+}
+
 #pragma mark - system
 -(void)dealloc
 {
