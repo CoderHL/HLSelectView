@@ -126,6 +126,7 @@ NSString *const fontName_ = @"PingFangSC-Medium";
         [btn setContentEdgeInsets:UIEdgeInsetsMake(5, 15, 5, 15)];
         [btn sizeToFit];
 //        [btn addTarget:self action:@selector(readBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        btn.userInteractionEnabled = NO;
         btn.layer.cornerRadius = btn.hlt_height/2.0;
         
         [self addSubview:btn];
@@ -134,12 +135,6 @@ NSString *const fontName_ = @"PingFangSC-Medium";
     
 }
 
-/*
-- (void)readBtnClick:(UIButton *)readBtn
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:HLNotificationReadBtnClick object:[NSNotification notificationWithName:HLNotificationReadBtnClick object:nil] userInfo:@{@"url":_urlLabel.text,@"currentIndex":@(_currentIndex)}];
-}
- */
 
 - (void)setCellValueWithDataModel:(id)dataModel KeyValues:(NSDictionary *)kayValues andIndex:(NSInteger)index
 {
