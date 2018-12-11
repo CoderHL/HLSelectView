@@ -253,6 +253,8 @@ static CGFloat const KCornerRadiu_ = 12;
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return _headerView.hlt_height;
@@ -275,6 +277,7 @@ static CGFloat const KCornerRadiu_ = 12;
         _maxY = _minY;
     }
 }
+
 #pragma mark - system
 -(void)dealloc
 {

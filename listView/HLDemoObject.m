@@ -26,7 +26,7 @@ static int getRandomNumber(int from, int to)
     HLDemoObject *object = [[self alloc]init];
     object.sourceName = sourceName;
     object.sourceUrl = sourceUrl;
-    object.selectedStr = [NSString stringWithFormat:@"%d%%网友选择",getRandomNumber(2,98)];
+    object.selectedStr = [NSString stringWithFormat:@"%d%%网友选择",getRandomNumber(80,98)];
     return object;
 }
 
