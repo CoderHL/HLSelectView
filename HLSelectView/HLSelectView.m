@@ -199,7 +199,7 @@ static CGFloat const KCornerRadiu_ = 12;
     [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [_containView setHlt_y:positionY];
         CGFloat alpha =  KMaxAlpha_*(_maxY-_containView.hlt_y)/(_maxY-_minY);
-        self.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:208/255.0 alpha:alpha].CGColor;
+        self.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha].CGColor;
     } completion:completion];
 }
 
