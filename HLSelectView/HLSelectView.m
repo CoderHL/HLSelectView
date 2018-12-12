@@ -36,7 +36,7 @@ NSString *const HLCellKeyOfFirstSubview = @"firstView";
 NSString *const HLCellKeyOfSecondSubview = @"secondView";
 NSString *const HLCellKeyOfThirdSubview = @"thirdView";
 NSString *const HLCellKeyOfFourSubview = @"fourView";
-static CGFloat const KMaxAlpha_ = 0.5;
+static CGFloat const KMaxAlpha_ = 1;
 static CGFloat const KCornerRadiu_ = 12;
 
 @implementation HLSelectView
@@ -64,7 +64,7 @@ static CGFloat const KCornerRadiu_ = 12;
 
 - (void)p_initialSetting
 {
-    self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    self.backgroundColor = [UIColor colorWithRed:214/255.0 green:214/255.0 blue:208/255.0 alpha:0.0];
     self.minY = _minY ? _minY : self.hlt_height/5.0;
 }
 
@@ -73,7 +73,7 @@ static CGFloat const KCornerRadiu_ = 12;
 {
     _frame = frame;
     UIView *containView = [[UIView alloc]initWithFrame:frame];
-    containView.layer.shadowColor = [UIColor blackColor].CGColor;
+    containView.layer.shadowColor = [UIColor colorWithRed:214/255.0 green:214/255.0 blue:208/255.0 alpha:1.0].CGColor;
     containView.layer.shadowOffset = CGSizeMake(0, -6);
     containView.layer.shadowOpacity = 1;
     containView.layer.shadowRadius = KCornerRadiu_;
@@ -167,7 +167,7 @@ static CGFloat const KCornerRadiu_ = 12;
         {
             CGFloat alpha = KMaxAlpha_*(_maxY-_containView.hlt_y)/(_maxY-_minY);
             [_containView setHlt_y: _containView.hlt_y + transPoint.y];
-            self.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha].CGColor;
+            self.layer.backgroundColor = [UIColor colorWithRed:214/255.0 green:214/255.0 blue:208/255.0 alpha:alpha].CGColor;
         }
         
     }else if (pan.state == UIGestureRecognizerStateEnded){
@@ -199,7 +199,7 @@ static CGFloat const KCornerRadiu_ = 12;
     [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [_containView setHlt_y:positionY];
         CGFloat alpha =  KMaxAlpha_*(_maxY-_containView.hlt_y)/(_maxY-_minY);
-        self.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:alpha].CGColor;
+        self.layer.backgroundColor = [UIColor colorWithRed:214/255.0 green:214/255.0 blue:208/255.0 alpha:alpha].CGColor;
     } completion:completion];
 }
 
