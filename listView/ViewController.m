@@ -29,7 +29,7 @@
     self.selectView = selectView;
     self.datas = [NSMutableArray array];
     HLDemoObject *object;
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<2; i++) {
        object = [HLDemoObject demoObjecWithSourceName:[NSString stringWithFormat:@"起点中文网"] sourceUrl:@"www.baidu.com.www.baidu.com.www.baidu.com.www.baidu.com.www.baidu.com"];
         [self.datas addObject:object];
     }

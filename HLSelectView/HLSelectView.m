@@ -273,17 +273,17 @@ static CGFloat const KCornerRadiu_ = 12;
     return _headerView;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
-{
-    
-    self.minY = (self.hlt_height - _minY)>tableView.contentSize.height ? self.hlt_height - tableView.contentSize.height : _minY;
-    if (_minY > _containView.hlt_y) {
-        _identifyView.hidden = YES;
-        _minY = _maxY;
-    }else{
-        _identifyView.hidden = NO;
-    }
-}
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+//{
+//    
+//    self.minY = (self.hlt_height - _minY)>tableView.contentSize.height ? self.hlt_height - tableView.contentSize.height : _minY;
+//    if (_minY > _containView.hlt_y) {
+//        _identifyView.hidden = YES;
+//        _minY = _maxY;
+//    }else{
+//        _identifyView.hidden = NO;
+//    }
+//}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
